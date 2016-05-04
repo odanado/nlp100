@@ -10,7 +10,6 @@ def read():
                 sentences.append(sentence)
             sentence = []
         else:
-            print(line)
             surface, features = line.split("\t")
             features = features.split(",")
             sentence.append({
@@ -22,5 +21,6 @@ def read():
 
     return sentences
 
-print(read())
+if __name__ == "__main__":
+    print(read())
 
