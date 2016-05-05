@@ -47,7 +47,8 @@ def read():
     for chunks in sentences:
         for i in range(len(chunks)):
             dst = chunks[i].dst
-            chunks[dst].srcs.append(i)
+            if dst != -1:
+                chunks[dst].srcs.append(i)
 
     return sentences
 
