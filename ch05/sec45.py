@@ -28,3 +28,4 @@ f = open("sec45.txt", "w")
 for chunks in sentences:
     f.write(sec45(chunks))
 
+# cat sec45.txt | grep '^する\t' | sort | uniq -c | sort -r | head
