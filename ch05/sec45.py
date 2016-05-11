@@ -1,6 +1,7 @@
 from sec41 import read
 
 def sec45(chunks):
+    res = ""
     for chunk in chunks:
         verb = [morph for morph in chunk.morphs if morph.pos == "動詞"]
         if len(verb) == 0: continue
@@ -9,10 +10,21 @@ def sec45(chunks):
         s = []
         
         for i in chunk.srcs:
-            s.append(" ".join([morph.base for morph in chunks[i].morphs if morph.pos == "助詞"]))
+            for morph in chunks[i].morphs:
+                if morph.pos == "助詞":
+                    s.append(morph.base)
 
-        print("%s\t%s" % (verb.base, " ".join(s)))
+        # 係っている格がないなら何もしない
+        if len(s) > 0:
+            res += "%s\t%s\n" % (verb.base, " ".join(s))
+
+    return res
 
 sentences = read()
-chunks = sentences[5]
-sec45(chunks)
+print(sec45(sentences[5]))
+
+f = open("sec45.txt", "w")
+
+for chunks in sentences:
+    f.write(sec45(chunks))
+
